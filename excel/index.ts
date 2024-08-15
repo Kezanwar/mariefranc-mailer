@@ -1,9 +1,7 @@
 import { readFileSync, writeFileSync } from "fs";
 import xlsx from "node-xlsx";
 import MailHistory from "../email/history";
-// Or var xlsx = require('node-xlsx').default;
 
-// Parse a buffer
 type Row = [
   string,
   string,
@@ -22,7 +20,7 @@ type Row = [
 ];
 
 class ExcelService {
-  static parseVenueData() {
+  static parseOldVenueData() {
     const workSheetsFromBuffer = xlsx.parse(
       readFileSync(`${process.cwd()}/excel/venue-data.xlsx`)
     );
@@ -91,7 +89,28 @@ class ExcelService {
 
     const newSheet = xlsx.build(venueData);
 
-    writeFileSync("updated-venue-data.xlsx", newSheet);
+    this.createFile("updated-venue-data.xlsx", newSheet);
+  }
+
+  static parseUpdatedVenueData() {
+    const workSheetsFromBuffer = xlsx.parse(
+      readFileSync(`${process.cwd()}/updated-venue-data.xlsx`)
+    );
+    writeFileSync(
+      "updated-venue-data.json",
+      JSON.stringify(workSheetsFromBuffer)
+    );
+  }
+
+  static getVenueDataToEmail() {
+    const venueData = JSON.parse(
+      String(readFileSync(`${process.cwd()}/updated-venue-data.json`))
+    );
+    return venueData;
+  }
+
+  static createFile(fileName: string, newSheet: Buffer) {
+    writeFileSync(fileName, newSheet);
   }
 }
 
