@@ -56,26 +56,24 @@ class EmailService {
     return renderFile(process.cwd() + "/email/template.ejs", data);
   }
 
-  static async sendAvailabilityTemplate(to: SendMailProps[]) {
-    for await (let p of to) {
-      const html = await this.createEmailTemplateHTML({
-        receiver: p.receiver,
-        title: "Band Availability for Gigs in September/October",
-        content: [
-          "We’re a Manchester-based band looking to book gigs for this autumn, ideally in September or October.",
-          "We’re open to both support or headline slots, though we currently feel more suited to support roles. As a six-piece band, we’ve had some great experiences, including radio play, previous gigs, and interest from major labels and management.",
-          "We’d love the opportunity to perform at your venue.",
-          'Heres a link to our latest release <a href="https://open.spotify.com/track/1LEG39QEB3rN8NYDRp8ubV?si=58b48d8b33e14d1b" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://open.spotify.com/track/1LEG39QEB3rN8NYDRp8ubV?si%3D58b48d8b33e14d1b&amp;source=gmail&amp;ust=1723735624022000&amp;usg=AOvVaw1udHgC5hZg8ykcEttV6_rK">"Alice"</a>.',
-        ],
-      });
-      await this.send({
-        to: p.to,
-        from: process.env.GMAIL_USER,
-        subject: "Band Availability for Gigs in September/October",
-        html,
-      });
-      await this.fakeLongLoadPromise();
-    }
+  static async sendAvailabilityTemplate(to: SendMailProps) {
+    const html = await this.createEmailTemplateHTML({
+      receiver: to.receiver,
+      title: "Band Availability for Gigs in September/October",
+      content: [
+        "We’re a Manchester-based band looking to book gigs for this autumn, ideally in September or October.",
+        "We’re open to both support or headline slots, though we currently feel more suited to support roles. As a six-piece band, we’ve had some great experiences, including radio play, previous gigs, and interest from major labels and management.",
+        "We’d love the opportunity to perform at your venue.",
+        'Heres a link to our latest release <a href="https://open.spotify.com/track/1LEG39QEB3rN8NYDRp8ubV?si=58b48d8b33e14d1b" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://open.spotify.com/track/1LEG39QEB3rN8NYDRp8ubV?si%3D58b48d8b33e14d1b&amp;source=gmail&amp;ust=1723735624022000&amp;usg=AOvVaw1udHgC5hZg8ykcEttV6_rK">"Alice"</a>.',
+      ],
+    });
+    await this.send({
+      to: to.to,
+      from: process.env.GMAIL_USER,
+      subject: "Band Availability for Gigs in September/October",
+      html,
+    });
+    await this.fakeLongLoadPromise();
   }
 }
 
