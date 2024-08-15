@@ -20,3 +20,5 @@ class MailHistory {
     return [...new Set(arr)];
   }
 }
+
+export default MailHistory;

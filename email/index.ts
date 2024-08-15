@@ -23,7 +23,7 @@ export type SendMailProps = {
   receiver: string;
 };
 
-class Email {
+class EmailService {
   static fakeLongLoadPromise(duration = 2000) {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -79,4 +79,4 @@ class Email {
   }
 }
 
-export default Email;
+export default EmailService;
