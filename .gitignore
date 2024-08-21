@@ -1,4 +1,4 @@
 .env
 node_modules
-*.json
-*.xlsx
+data
+.DS_store

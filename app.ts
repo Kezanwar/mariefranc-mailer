@@ -14,6 +14,7 @@ for await (let [index, row] of rows.entries()) {
   if (row[ExcelService.cols["Has Been Emailed"]] !== "Yes") {
     const emails = row[ExcelService.cols["Venue Email"]];
     const venueName = row[ExcelService.cols["Venue Name"]];
+
     if (emails) {
       for await (let email of emails.split(";")) {
         const to = {
@@ -21,7 +22,7 @@ for await (let [index, row] of rows.entries()) {
           to: email,
         };
 
-        await EmailService.sendAvailabilityTemplate(to);
+        await EmailService.sendAvailabilityTemplate(to); //TODO: should catch and handle an email error here.
 
         row[ExcelService.cols["Has Been Emailed"]] = "Yes";
       }
