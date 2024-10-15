@@ -75,6 +75,10 @@ class EmailService {
     });
     await this.fakeLongLoadPromise();
   }
+
+  static printSting(str: string) {
+    console.log(str);
+  }
 }
 
 export default EmailService;

@@ -4,8 +4,7 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node --no-warnings --env-file='.env'  --import=tsx --experimental-strip-types --watch app.ts",
-    "dev": "node --no-warnings --env-file='.env'  --import=tsx --experimental-strip-types app.ts"
+    "exec": "node --env-file='.env' --import=tsx app.ts"
   },
   "type": "module",
   "author": "",
