@@ -57,10 +57,11 @@ while (true) {
 
   if (last_index >= END) {
     console.log("🚀 Finished sending all emails");
+    EmailService.closeTransporter();
     break;
   }
 
-  if (batch_count_since_timeout === 3) {
+  if (batch_count_since_timeout === 2) {
     console.log(
       "😴 Sent 40 emails in the last 60 seconds - Sleeping for 45 seconds to not overload the Gmail API and get flagged for spam"
     );

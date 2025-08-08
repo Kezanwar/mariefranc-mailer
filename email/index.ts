@@ -6,6 +6,7 @@ import { readFile, writeFile } from "fs/promises";
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
+  pool: true,
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASS,
@@ -30,6 +31,10 @@ class EmailService {
         resolve("");
       }, duration);
     });
+  }
+
+  static closeTransporter() {
+    transporter.close();
   }
 
   static async send(mailOptions: Mail.Options) {
