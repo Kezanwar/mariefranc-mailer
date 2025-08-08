@@ -1,9 +1,9 @@
 import EmailService from "./email";
-import { emailAddresses, testEmails } from "./travs-emails";
+import { emailAddresses } from "./travs-emails";
 import fs from "fs/promises";
 
 const BATCH_AMOUNT = 10;
-const END = testEmails.length;
+const END = emailAddresses.length;
 
 let last_index = 0;
 let batch_count_since_timeout = 0;
@@ -15,7 +15,7 @@ console.log(
 );
 
 while (true) {
-  const batch = testEmails.slice(last_index, last_index + BATCH_AMOUNT);
+  const batch = emailAddresses.slice(last_index, last_index + BATCH_AMOUNT);
 
   const promises = batch.map((email) => EmailService.sendTravsEmail(email));
 
