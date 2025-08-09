@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from "fs";
 import xlsx, { WorkSheet } from "node-xlsx";
-import MailHistory from "../email/history";
+import MailHistory from "../../email/history";
 
 export type Row = [
   string,
